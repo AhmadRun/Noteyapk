@@ -1,3 +1,9 @@
+"Note: This application was created to test Gemini Pro via the Gemini CLI."
+
+
+🛠️ Tech Stack: Python & Google Gemini CLI.
+
+
 # Notey 📝
 
 **Notey** is a modern, secure, and beautiful Android notes application built with **Kotlin** and **Jetpack Compose**. It features a stunning **Glassmorphism UI**, biometric security, and full offline capabilities.
