@@ -17,6 +17,8 @@ class ReminderWorker(
         val title = inputData.getString("title") ?: "Reminder"
         val content = inputData.getString("content") ?: ""
         
+        // The channel must exist before notifying on Android 8+, or the notification is dropped
+        NotificationHelper.createNotificationChannel(context)
         NotificationHelper.showReminderNotification(context, noteId, title, content)
         
         return Result.success()

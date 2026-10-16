@@ -163,7 +163,7 @@ fun HomeScreen(
                             onClick = { selectedCategoryId = null }
                         )
                     }
-                    items(categories) { category ->
+                    items(categories, key = { it.id }) { category ->
                         CategoryChip(
                             name = category.name,
                             isSelected = selectedCategoryId == category.id,
@@ -192,7 +192,7 @@ fun HomeScreen(
                     LazyColumn(
                         verticalArrangement = Arrangement.spacedBy(12.dp)
                     ) {
-                        items(filteredNotes) { note ->
+                        items(filteredNotes, key = { it.id }) { note ->
                             NoteCard(
                                 note = note, 
                                 textColor = textColor,
@@ -261,7 +261,7 @@ fun NoteCard(
     accentColor: Color,
     onDelete: () -> Unit
 ) {
-    val dateFormat = SimpleDateFormat("MMM dd, yyyy HH:mm", Locale.getDefault())
+    val dateFormat = remember { SimpleDateFormat("MMM dd, yyyy HH:mm", Locale.getDefault()) }
     val noteColor = Color(NoteColors.getColor(note.color))
     
     GlassCard(modifier = Modifier.fillMaxWidth()) {

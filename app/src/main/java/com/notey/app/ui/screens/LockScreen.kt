@@ -60,7 +60,12 @@ fun LockScreen(
                     
                     OutlinedTextField(
                         value = pin,
-                        onValueChange = { if (it.length <= 6) pin = it },
+                        onValueChange = { input ->
+                            if (input.length <= 6 && input.all { it.isDigit() }) {
+                                pin = input
+                                error = ""
+                            }
+                        },
                         label = { Text("PIN (4-6 digits)") },
                         visualTransformation = PasswordVisualTransformation(),
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.NumberPassword),
