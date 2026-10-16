@@ -1,9 +1,11 @@
 package com.notey.app
 
 import android.os.Bundle
+import androidx.activity.compose.BackHandler
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.lifecycleScope
 import com.notey.app.data.AppDatabase
@@ -39,8 +41,9 @@ class MainActivity : FragmentActivity() {
             var currentTheme by remember { mutableStateOf(settingsManager.themeMode) }
             
             NoteyTheme(dynamicColor = false) {
-                var isUnlocked by remember { mutableStateOf(false) }
-                var showSettings by remember { mutableStateOf(false) }
+                // Saveable so rotating the screen does not lock the app or close Settings
+                var isUnlocked by rememberSaveable { mutableStateOf(false) }
+                var showSettings by rememberSaveable { mutableStateOf(false) }
                 var notes by remember { mutableStateOf<List<Note>>(emptyList()) }
                 var categories by remember { mutableStateOf<List<Category>>(emptyList()) }
                 
@@ -85,6 +88,7 @@ class MainActivity : FragmentActivity() {
                         )
                     }
                     showSettings -> {
+                        BackHandler { showSettings = false }
                         SettingsScreen(
                             currentTheme = currentTheme,
                             onThemeChange = { newTheme ->

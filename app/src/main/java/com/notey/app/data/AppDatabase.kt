@@ -28,7 +28,7 @@ abstract class AppDatabase : RoomDatabase() {
                     AppDatabase::class.java,
                     "notey_database"
                 )
-                .fallbackToDestructiveMigration() // Simple migration for dev
+                .fallbackToDestructiveMigration(dropAllTables = true) // Simple migration for dev
                 .build()
                 INSTANCE = instance
                 instance
